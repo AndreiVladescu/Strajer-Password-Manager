@@ -1,5 +1,5 @@
 ﻿
-namespace Server.Forms
+namespace Client
 {
     partial class Login
     {
@@ -29,57 +29,42 @@ namespace Server.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LblUsername = new System.Windows.Forms.Label();
-            this.TextBoxUsername = new System.Windows.Forms.TextBox();
+            this.LblTitle = new System.Windows.Forms.Label();
             this.TextBoxPassword = new System.Windows.Forms.TextBox();
             this.LblPassword = new System.Windows.Forms.Label();
-            this.LblTitle = new System.Windows.Forms.Label();
+            this.TextBoxUsername = new System.Windows.Forms.TextBox();
+            this.LblUsername = new System.Windows.Forms.Label();
+            this.PictureLogin = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureLogin)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.PictureLogin);
             this.panel1.Controls.Add(this.LblTitle);
             this.panel1.Controls.Add(this.TextBoxPassword);
             this.panel1.Controls.Add(this.LblPassword);
             this.panel1.Controls.Add(this.TextBoxUsername);
             this.panel1.Controls.Add(this.LblUsername);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(-2, -2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(476, 454);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // LblTitle
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(228, 451);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // LblUsername
-            // 
-            this.LblUsername.AutoSize = true;
-            this.LblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblUsername.Location = new System.Drawing.Point(260, 104);
-            this.LblUsername.Name = "LblUsername";
-            this.LblUsername.Size = new System.Drawing.Size(71, 16);
-            this.LblUsername.TabIndex = 1;
-            this.LblUsername.Text = "Username";
-            // 
-            // TextBoxUsername
-            // 
-            this.TextBoxUsername.Location = new System.Drawing.Point(265, 134);
-            this.TextBoxUsername.Name = "TextBoxUsername";
-            this.TextBoxUsername.Size = new System.Drawing.Size(128, 20);
-            this.TextBoxUsername.TabIndex = 2;
+            this.LblTitle.AutoSize = true;
+            this.LblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblTitle.Location = new System.Drawing.Point(303, 20);
+            this.LblTitle.Name = "LblTitle";
+            this.LblTitle.Size = new System.Drawing.Size(62, 24);
+            this.LblTitle.TabIndex = 5;
+            this.LblTitle.Text = "Login";
             // 
             // TextBoxPassword
             // 
@@ -98,15 +83,32 @@ namespace Server.Forms
             this.LblPassword.TabIndex = 3;
             this.LblPassword.Text = "Password";
             // 
-            // LblTitle
+            // TextBoxUsername
             // 
-            this.LblTitle.AutoSize = true;
-            this.LblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTitle.Location = new System.Drawing.Point(303, 20);
-            this.LblTitle.Name = "LblTitle";
-            this.LblTitle.Size = new System.Drawing.Size(62, 24);
-            this.LblTitle.TabIndex = 5;
-            this.LblTitle.Text = "Login";
+            this.TextBoxUsername.Location = new System.Drawing.Point(265, 134);
+            this.TextBoxUsername.Name = "TextBoxUsername";
+            this.TextBoxUsername.Size = new System.Drawing.Size(128, 20);
+            this.TextBoxUsername.TabIndex = 2;
+            // 
+            // LblUsername
+            // 
+            this.LblUsername.AutoSize = true;
+            this.LblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsername.Location = new System.Drawing.Point(260, 104);
+            this.LblUsername.Name = "LblUsername";
+            this.LblUsername.Size = new System.Drawing.Size(71, 16);
+            this.LblUsername.TabIndex = 1;
+            this.LblUsername.Text = "Username";
+            // 
+            // PictureLogin
+            // 
+            this.PictureLogin.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureLogin.BackgroundImage")));
+            this.PictureLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PictureLogin.Location = new System.Drawing.Point(0, 0);
+            this.PictureLogin.Name = "PictureLogin";
+            this.PictureLogin.Size = new System.Drawing.Size(228, 451);
+            this.PictureLogin.TabIndex = 0;
+            this.PictureLogin.TabStop = false;
             // 
             // Login
             // 
@@ -118,7 +120,7 @@ namespace Server.Forms
             this.Text = "Login";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureLogin)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -131,6 +133,6 @@ namespace Server.Forms
         private System.Windows.Forms.Label LblPassword;
         private System.Windows.Forms.TextBox TextBoxUsername;
         private System.Windows.Forms.Label LblUsername;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PictureLogin;
     }
 }

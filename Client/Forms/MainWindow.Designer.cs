@@ -1,5 +1,5 @@
 ﻿
-namespace Străjer_Password_Manager
+namespace Client
 {
     partial class MainWindow
     {
