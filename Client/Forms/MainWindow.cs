@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Client
 {
@@ -15,6 +18,35 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Console.WriteLine("*******This is client program who is connected to localhost on port No:10*****");
+            try
+            {
+                string outputString;
+                // read the data from the host and display it
+                {
+                    //outputString = ClientMain.client.streamReader.ReadLine();
+                    //Console.WriteLine("Message Recieved by server:" + outputString);
+
+                    //Console.WriteLine("Type your message to be recieved by server:");
+                    Console.WriteLine("type:");
+                    string str = textBox1.Text;
+                    ClientMain.client.streamWriter.WriteLine(str);
+                    ClientMain.client.streamWriter.Flush();
+                    if (str == "exit")
+                    {
+                        ClientMain.client.CloseConnection();
+                    }
+
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception reading from Server");
+            }
         }
     }
 }
