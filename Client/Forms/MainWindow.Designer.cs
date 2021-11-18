@@ -35,7 +35,7 @@ namespace Client
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(111, 139);
+            this.textBox1.Location = new System.Drawing.Point(98, 123);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(356, 228);

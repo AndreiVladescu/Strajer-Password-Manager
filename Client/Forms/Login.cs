@@ -16,5 +16,15 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            ClientMain.client.streamWriter.WriteLine("login");
+            ClientMain.client.streamWriter.Flush();
+            ClientMain.client.streamWriter.WriteLine(TextBoxUsername.Text);
+            ClientMain.client.streamWriter.Flush();
+            ClientMain.client.streamWriter.WriteLine(TextBoxPassword.Text);
+            ClientMain.client.streamWriter.Flush();
+        }
     }
 }

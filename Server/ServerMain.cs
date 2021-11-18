@@ -12,8 +12,11 @@ namespace Server
     {
         static IPAddress ipAd = IPAddress.Parse("192.168.0.101");
         static TcpListener tcpListener = new TcpListener(ipAd, 8001);
+        // Make sql server configuration here
+        public static SQLManager sqlManager = new SQLManager("DESKTOP-D5T114U\\SQLEXPRESS", "Strajer Password Manager");
         static void Main(string[] args)
         {
+
             tcpListener.Start();
             //Console.WriteLine("************This is Server program************");
             //Console.WriteLine("How many clients are going to connect to this server?:");
@@ -45,18 +48,36 @@ namespace Server
                 //streamWriter.Flush();
 
 
-
-                //here we recieve client's text if any.
-                while (socketForClient.Connected)
+                try
                 {
-                    string theString = streamReader.ReadLine();
-                    Console.WriteLine("Message recieved by client:" + theString);
-                    if (theString == "exit")
-                        break;
+                    //here we recieve client's text if any.
+                    while (socketForClient.Connected)
+                    {
+                        string theString = streamReader.ReadLine();
+                        Console.WriteLine("Message recieved by client:" + theString);
+                        if (theString == "exit")
+                            break;
+                        else if (theString == "login")
+                        {
+                            string userName = streamReader.ReadLine();
+                            string password = streamReader.ReadLine();
+                            if (sqlManager.Login(userName, password))
+                            {
+                                Console.WriteLine("User has logged succesfully");
+                            }
+                            else
+                                Console.WriteLine("User login failed");
+                        }
+
+                    }
+                    streamReader.Close();
+                    networkStream.Close();
+                    streamWriter.Close();
                 }
-                streamReader.Close();
-                networkStream.Close();
-                streamWriter.Close();
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.ToString());
+                }
 
 
             }
