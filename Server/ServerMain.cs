@@ -11,7 +11,7 @@ namespace Server
     class ServerMain
     {
         static IPAddress ipAd = IPAddress.Parse("192.168.0.101");
-        static TcpListener tcpListener = new TcpListener(ipAd, 8001);
+        static TcpListener tcpListener = new TcpListener(ipAd, 753);
         // Make sql server configuration here
         public static SQLManager sqlManager = new SQLManager("DESKTOP-D5T114U\\SQLEXPRESS", "Strajer Password Manager");
         static void Main(string[] args)
@@ -76,14 +76,12 @@ namespace Server
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine(exception.ToString());
+                    Console.WriteLine("Client " + socketForClient.RemoteEndPoint.ToString() + " disconnected");
                 }
 
 
             }
             socketForClient.Close();
-            Console.WriteLine("Press any key to exit from server program");
-            Console.ReadKey();
         }
         
     }

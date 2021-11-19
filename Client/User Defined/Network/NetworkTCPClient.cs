@@ -17,14 +17,18 @@ namespace Client
         public StreamWriter streamWriter;
         public NetworkTCPClient()
         {
+            
+        }
+        public void Configure(string serverIPAddress, int serverPort = 753)
+        {
             try
             {
-                socketForServer = new TcpClient("192.168.0.101", 8001);
+                socketForServer = new TcpClient(serverIPAddress, serverPort);
             }
             catch
             {
                 Console.WriteLine(
-                "Failed to connect to server at {0}:999", "192.168.0.101");
+                "Failed to connect to server at {0}:{1}", serverIPAddress, serverPort);
                 return;
             }
             networkStream = socketForServer.GetStream();
