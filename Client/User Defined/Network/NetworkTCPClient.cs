@@ -15,10 +15,6 @@ namespace Client
         public TcpClient socketForServer;
         public StreamReader streamReader;
         public StreamWriter streamWriter;
-        public NetworkTCPClient()
-        {
-            
-        }
         public void Configure(string serverIPAddress, int serverPort = 753)
         {
             try
@@ -41,7 +37,7 @@ namespace Client
         }
         ~NetworkTCPClient()
         {
-           
+            CloseConnection();  
         }
     }
 }

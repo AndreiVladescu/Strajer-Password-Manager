@@ -21,8 +21,7 @@ namespace Client
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            //Console.WriteLine("*******This is client program who is connected to localhost on port No:10*****");
+        { 
             try
             {
                 string outputString;
@@ -30,7 +29,6 @@ namespace Client
                 {
                     //outputString = ClientMain.client.streamReader.ReadLine();
                     //Console.WriteLine("Message Recieved by server:" + outputString);
-
                     //Console.WriteLine("Type your message to be recieved by server:");
                     Console.WriteLine("type:");
                     string str = textBox1.Text;

@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="ClientMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User Defined\Account Name\AccountClass.cs" />
     <Compile Include="User Defined\Credentials Classes\CredentialClass.cs" />
     <Compile Include="User Defined\Network\NetworkTCPClient.cs" />
     <EmbeddedResource Include="Forms\Login.resx">

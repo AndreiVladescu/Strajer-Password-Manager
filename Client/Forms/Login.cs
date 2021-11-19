@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using SharedLibrary;
 
 namespace Client
 {
@@ -25,9 +26,7 @@ namespace Client
                 ClientMain.client.Configure(TextBoxServerIP.Text);
                 Thread.Sleep(1000);
                 ClientMain.client.streamWriter.WriteLine("login");
-                ClientMain.client.streamWriter.Flush();
                 ClientMain.client.streamWriter.WriteLine(TextBoxUsername.Text);
-                ClientMain.client.streamWriter.Flush();
                 ClientMain.client.streamWriter.WriteLine(TextBoxPassword.Text);
                 ClientMain.client.streamWriter.Flush();
             }

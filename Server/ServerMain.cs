@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
+using SharedLibrary;
 
 namespace Server
 {
