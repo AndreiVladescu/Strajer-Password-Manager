@@ -10,8 +10,10 @@ namespace Server
     public class Logger
     {
         string fileName;
-        public Logger(string logExtension = "log")
+        bool consoleOutput;
+        public Logger(string logExtension = "log", bool writeToConsole = true)
         {
+            consoleOutput = true;
             string time = DateTime.Now.ToUniversalTime().ToString();
             time = time.Replace('/', '-');
             time = time.Replace(':', '-');
@@ -22,11 +24,15 @@ namespace Server
         {
             string time = DateTime.Now.ToShortTimeString();
             File.AppendAllText(fileName,time + ": " + message + "\n");
+            if (consoleOutput)
+                Console.WriteLine(time + ": " + message);
         }
         public void Write(string message)
         {
             string time = DateTime.Now.ToShortTimeString();
             File.AppendAllText(fileName, time + ": " + message);
+            if (consoleOutput)
+                Console.Write(time + ": " + message);
         }
 
     }

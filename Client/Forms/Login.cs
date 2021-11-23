@@ -24,15 +24,24 @@ namespace Client
             try
             {
                 ClientMain.client.Configure(TextBoxServerIP.Text);
-                Thread.Sleep(1000);
-                ClientMain.client.streamWriter.WriteLine("login");
-                ClientMain.client.streamWriter.WriteLine(TextBoxUsername.Text);
-                ClientMain.client.streamWriter.WriteLine(TextBoxPassword.Text);
+
+                Packet loginPacket = new Packet();
+                loginPacket.SetHeader(PacketHeader.LoginRequest);
+                List<string> loginData = new List<string> { TextBoxUsername.Text, TextBoxPassword.Text };
+                loginPacket.SetData(loginData);
+
+                ClientMain.client.streamWriter.WriteLine(loginPacket.ToString());
                 ClientMain.client.streamWriter.Flush();
+
+                string response = ClientMain.client.streamReader.ReadLine();
+                if (response == PacketHeader.LoginResponsePositive.ToString())
+                    LblStatus.Text = "Connected";
+                else
+                    LblStatus.Text = "Could not connect";
             }
             catch(Exception exception)
             {
-                LblStatus.Text = "Could not connect to server. Please retry.";
+
             }
         }
     }

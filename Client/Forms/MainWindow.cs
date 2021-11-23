@@ -24,22 +24,22 @@ namespace Client
         { 
             try
             {
-                string outputString;
-                // read the data from the host and display it
-                {
-                    //outputString = ClientMain.client.streamReader.ReadLine();
-                    //Console.WriteLine("Message Recieved by server:" + outputString);
-                    //Console.WriteLine("Type your message to be recieved by server:");
-                    Console.WriteLine("type:");
-                    string str = textBox1.Text;
-                    ClientMain.client.streamWriter.WriteLine(str);
-                    ClientMain.client.streamWriter.Flush();
-                    if (str == "exit")
-                    {
-                        ClientMain.client.CloseConnection();
-                    }
+                //string outputString;
+                //// read the data from the host and display it
+                //{
+                //    //outputString = ClientMain.client.streamReader.ReadLine();
+                //    //Console.WriteLine("Message Recieved by server:" + outputString);
+                //    //Console.WriteLine("Type your message to be recieved by server:");
+                //    Console.WriteLine("type:");
+                //    string str = textBox1.Text;
+                //    ClientMain.client.streamWriter.WriteLine(str);
+                //    ClientMain.client.streamWriter.Flush();
+                //    if (str == "exit")
+                //    {
+                //        ClientMain.client.CloseConnection();
+                //    }
 
-                }
+                //}
             }
             catch
             {

@@ -33,7 +33,6 @@ namespace Client
             this.panel1 = new System.Windows.Forms.Panel();
             this.LblServerIP = new System.Windows.Forms.Label();
             this.TextBoxServerIP = new System.Windows.Forms.TextBox();
-            this.LblStatus = new System.Windows.Forms.Label();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.PictureLogin = new System.Windows.Forms.PictureBox();
             this.LblTitle = new System.Windows.Forms.Label();
@@ -41,6 +40,7 @@ namespace Client
             this.LblPassword = new System.Windows.Forms.Label();
             this.TextBoxUsername = new System.Windows.Forms.TextBox();
             this.LblUsername = new System.Windows.Forms.Label();
+            this.LblStatus = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureLogin)).BeginInit();
             this.SuspendLayout();
@@ -49,9 +49,9 @@ namespace Client
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.LblStatus);
             this.panel1.Controls.Add(this.LblServerIP);
             this.panel1.Controls.Add(this.TextBoxServerIP);
-            this.panel1.Controls.Add(this.LblStatus);
             this.panel1.Controls.Add(this.BtnLogin);
             this.panel1.Controls.Add(this.PictureLogin);
             this.panel1.Controls.Add(this.LblTitle);
@@ -81,16 +81,6 @@ namespace Client
             this.TextBoxServerIP.Size = new System.Drawing.Size(130, 20);
             this.TextBoxServerIP.TabIndex = 8;
             this.TextBoxServerIP.Text = "192.168.0.101";
-            // 
-            // LblStatus
-            // 
-            this.LblStatus.AutoSize = true;
-            this.LblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblStatus.Location = new System.Drawing.Point(263, 330);
-            this.LblStatus.Name = "LblStatus";
-            this.LblStatus.Size = new System.Drawing.Size(97, 16);
-            this.LblStatus.TabIndex = 7;
-            this.LblStatus.Text = "Not Connected";
             // 
             // BtnLogin
             // 
@@ -156,6 +146,15 @@ namespace Client
             this.LblUsername.TabIndex = 1;
             this.LblUsername.Text = "Username";
             // 
+            // LblStatus
+            // 
+            this.LblStatus.AutoSize = true;
+            this.LblStatus.Location = new System.Drawing.Point(266, 350);
+            this.LblStatus.Name = "LblStatus";
+            this.LblStatus.Size = new System.Drawing.Size(79, 13);
+            this.LblStatus.TabIndex = 10;
+            this.LblStatus.Text = "Not Connected";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,9 +179,9 @@ namespace Client
         private System.Windows.Forms.TextBox TextBoxUsername;
         private System.Windows.Forms.Label LblUsername;
         private System.Windows.Forms.PictureBox PictureLogin;
-        private System.Windows.Forms.Label LblStatus;
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Label LblServerIP;
         private System.Windows.Forms.TextBox TextBoxServerIP;
+        private System.Windows.Forms.Label LblStatus;
     }
 }

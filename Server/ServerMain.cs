@@ -15,19 +15,18 @@ namespace Server
         static TcpListener tcpListener = new TcpListener(ipAd, 753);
         // Make sql server configuration here
         public static SQLManager sqlManager = new SQLManager("DESKTOP-D5T114U\\SQLEXPRESS", "Strajer Password Manager");
-        public static Logger logger = new Logger("log");
+        // Loggging
+        public static Logger logger = new Logger("log", true);
         static void Main(string[] args)
         {
-
             tcpListener.Start();
             logger.WriteLine("Server online");
-            int numberOfClientsYouNeedToConnect = 5; /*int.Parse(Console.ReadLine());*/
-            for (int i = 0; i < numberOfClientsYouNeedToConnect; i++)
+            int numberOfClients = 10; /*int.Parse(Console.ReadLine());*/
+            for (int i = 0; i < numberOfClients; i++)
             {
                 Thread newThread = new Thread(new ThreadStart(Listeners));
                 newThread.Start();
             }
-            logger.WriteLine("Server closed");
         }
         static void Listeners()
         {
@@ -35,61 +34,69 @@ namespace Server
             Socket socketForClient = tcpListener.AcceptSocket();
             if (socketForClient.Connected)
             {
-                Console.WriteLine("Client:" + socketForClient.RemoteEndPoint + " now connected to server.");
                 logger.WriteLine("Client:" + socketForClient.RemoteEndPoint + " now connected to server.");
                 NetworkStream networkStream = new NetworkStream(socketForClient);
                 StreamWriter streamWriter = new StreamWriter(networkStream);
                 StreamReader streamReader = new StreamReader(networkStream);
 
-                ////here we send message to client
-                //Console.WriteLine("type your message to be recieved by client:");
-                //string theString = Console.ReadLine();
-                //streamWriter.WriteLine(theString);
-                ////Console.WriteLine(theString);
-                //streamWriter.Flush();
-
-
-                try
-                {
-                    //here we recieve client's text if any.
-                    while (socketForClient.Connected)
-                    {
-                        string theString = streamReader.ReadLine();
-                        Console.WriteLine("Message recieved by client:" + theString);
-                        logger.WriteLine("Message recieved by client:" + theString);
-                        if (theString == "exit")
-                            break;
-                        else if (theString == "login")
-                        {
-                            string userName = streamReader.ReadLine();
-                            string password = streamReader.ReadLine();
-                            if (sqlManager.Login(userName, password))
-                            {
-                                Console.WriteLine("User has logged succesfully");
-                                logger.WriteLine("User has logged succesfully");
-                            }
-                            else
-                            {
-                                Console.WriteLine("User login failed");
-                                logger.WriteLine("User login failed");
-                            }
-                                
-                        }
-
-                    }
-                    streamReader.Close();
-                    networkStream.Close();
-                    streamWriter.Close();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine("Client " + socketForClient.RemoteEndPoint.ToString() + " disconnected");
-                    logger.WriteLine("Client " + socketForClient.RemoteEndPoint.ToString() + " disconnected");
-                }
-
-
+                ProcessRequest(ref socketForClient,ref networkStream, ref streamWriter, ref streamReader);
             }
+            
             socketForClient.Close();
+        }
+        static void LoginFunction(string userName, string password, ref StreamWriter streamWriter)
+        {
+            if (sqlManager.Login(userName, password))
+            {
+                logger.WriteLine("User has logged succesfully");
+                streamWriter.WriteLine(PacketHeader.LoginResponsePositive);
+            }
+            else
+            {
+                logger.WriteLine("User login failed");
+                streamWriter.WriteLine(PacketHeader.LoginResponseNegative);
+            }
+            streamWriter.Flush();
+        }
+        static void ProcessRequest(ref Socket socketForClient, ref NetworkStream networkStream, 
+            ref StreamWriter streamWriter, ref StreamReader streamReader)
+        {
+            try
+            {
+                // Here we recieve client's text if any.
+                while (socketForClient.Connected)
+                {
+                    string recvMessageEncoded = streamReader.ReadLine();
+                    Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
+                    logger.WriteLine("Message recieved by client:" + recvPacket.GetUnifiedDecodedMessage());
+                    switch (recvPacket.GetHeader())
+                    {
+                        case PacketHeader.LogoutRequest:
+                            {
+                                throw (new Exception("Client disconnected"));
+                            }
+                        case PacketHeader.LoginRequest:
+                            {
+                                string userName = recvPacket.GetDecodedMessage()[0];
+                                string password = recvPacket.GetDecodedMessage()[1];
+                                LoginFunction(userName, password, ref streamWriter);
+                                break;
+                            }
+                        default:
+                            {
+                                Console.WriteLine("Unrecognised command");
+                                break;
+                            }
+                    }
+                }
+                streamReader.Close();
+                networkStream.Close();
+                streamWriter.Close();
+            }
+            catch (Exception exception)
+            {
+                logger.WriteLine("Client " + socketForClient.RemoteEndPoint.ToString() + " disconnected");
+            }
         }
         
     }

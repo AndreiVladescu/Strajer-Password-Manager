@@ -26,13 +26,13 @@ namespace Server
             connection.Open();
             command.Connection = connection;
             command.CommandText = "select ID from Account where (Password = '" 
-                + password 
+                + password
                 + "' and UserName = '"
                 + loginName
                 + "') or(Password = '"
-                + password 
+                + password
                 + "' and Email = '" 
-                + loginName 
+                + loginName
                 + "')";
 
             dataReader = command.ExecuteReader();
