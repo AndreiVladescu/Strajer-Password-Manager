@@ -33,8 +33,10 @@ namespace Client
                 ClientMain.client.streamWriter.WriteLine(loginPacket.ToString());
                 ClientMain.client.streamWriter.Flush();
 
-                string response = ClientMain.client.streamReader.ReadLine();
-                if (response == PacketHeader.LoginResponsePositive.ToString())
+                string recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
+                Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
+                
+                if (recvPacket.GetHeader() == PacketHeader.LoginResponsePositive)
                     LblStatus.Text = "Connected";
                 else
                     LblStatus.Text = "Could not connect";

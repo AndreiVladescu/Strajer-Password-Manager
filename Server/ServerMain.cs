@@ -46,16 +46,20 @@ namespace Server
         }
         static void LoginFunction(string userName, string password, ref StreamWriter streamWriter)
         {
+            Packet loginPacket = new Packet();
+            PacketHeader response;
             if (sqlManager.Login(userName, password))
             {
                 logger.WriteLine("User has logged succesfully");
-                streamWriter.WriteLine(PacketHeader.LoginResponsePositive);
+                response = PacketHeader.LoginResponsePositive;
             }
             else
             {
                 logger.WriteLine("User login failed");
-                streamWriter.WriteLine(PacketHeader.LoginResponseNegative);
+                response = PacketHeader.LoginResponseNegative;
             }
+            loginPacket.SetHeader(response);
+            streamWriter.WriteLine(loginPacket.ToString());
             streamWriter.Flush();
         }
         static void ProcessRequest(ref Socket socketForClient, ref NetworkStream networkStream, 
@@ -63,7 +67,7 @@ namespace Server
         {
             try
             {
-                // Here we recieve client's text if any.
+                // Here we recieve client's response if any.
                 while (socketForClient.Connected)
                 {
                     string recvMessageEncoded = streamReader.ReadLine();

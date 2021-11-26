@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,30 @@ namespace SharedLibrary
         private string data;
         private PacketHeader packetHeader;
         private char delimiter;
-        public Packet()
+        public Packet(char newDelimiter = (char)0x1c)
         {
             // (char)0x1c - unit delimiter
-            delimiter = (char)0x1c;
+            delimiter = newDelimiter;
+        }
+        public Packet(PacketHeader newHeader, string newData, char newDelimiter = (char)0x1c)
+        {
+            ///<summary>
+            ///This constructor needs a directly encoded data field or just 1 unencoded string
+            ///</summary>
+
+            delimiter = newDelimiter;
+            packetHeader = newHeader;
+            data = newData;
+        }
+        public Packet(PacketHeader newHeader, List<string> newData, char newDelimiter = (char)0x1c)
+        {
+            ///<summary>
+            ///This constructor requires a list of strings that will be encoded afterwards
+            ///</summary>
+
+            delimiter = newDelimiter;
+            packetHeader = newHeader;
+            data = Parser.EncodeMessage(newData, delimiter);
         }
         public void SetHeader(PacketHeader newHeader, char newDelimiter = (char)0x1c)
         {

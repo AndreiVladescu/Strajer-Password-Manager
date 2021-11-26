@@ -33,8 +33,9 @@ namespace SharedLibrary
         static public Pair<PacketHeader, string> SplitPacket(string packetData, char delimiter = (char)0x1c)
         {
             Pair<PacketHeader, string> splitPacket = new Pair<PacketHeader, string>(PacketHeader.NoAction,"");
-           
-            splitPacket.Item1 = (PacketHeader)Int32.Parse(packetData.Split(delimiter)[0]);
+
+            string str = packetData.Split(delimiter)[0];
+            splitPacket.Item1 = (PacketHeader)Convert.ToInt32(str);
             splitPacket.Item2 = packetData.Substring(4);
             return splitPacket;
         }

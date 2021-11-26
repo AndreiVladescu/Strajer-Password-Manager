@@ -23,7 +23,7 @@ namespace Server
         public void WriteLine(string message)
         {
             string time = DateTime.Now.ToShortTimeString();
-            File.AppendAllText(fileName,time + ": " + message + "\n");
+            File.AppendAllText(fileName, time + ": " + message + "\n");
             if (consoleOutput)
                 Console.WriteLine(time + ": " + message);
         }
