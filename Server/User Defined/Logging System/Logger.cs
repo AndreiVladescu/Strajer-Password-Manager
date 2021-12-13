@@ -13,7 +13,7 @@ namespace Server
         bool consoleOutput;
         public Logger(string logExtension = "log", bool writeToConsole = true)
         {
-            consoleOutput = true;
+            consoleOutput = writeToConsole;
             string time = DateTime.Now.ToUniversalTime().ToString();
             time = time.Replace('/', '-');
             time = time.Replace(':', '-');

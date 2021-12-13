@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Credentials\CredentialClass.cs" />
+    <Compile Include="Credentials\ListClass.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="PacketHeader.cs" />

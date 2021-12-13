@@ -13,6 +13,8 @@ namespace SharedLibrary
         LogoutRequest = 101,
         LoginResponsePositive = 102,
         LoginResponseNegative = 103,
-        LogoutResponse = 104
+        LogoutResponse = 104,
+        SendClientCredentials = 105,
+        SendClientDetails = 106
     }
 }

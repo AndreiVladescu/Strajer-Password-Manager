@@ -17,25 +17,32 @@ namespace SharedLibrary
             // (char)0x1c - unit delimiter
             delimiter = newDelimiter;
         }
+        ///<summary>
+        ///This constructor needs a directly encoded data field or just 1 unencoded string
+        ///</summary>
         public Packet(PacketHeader newHeader, string newData, char newDelimiter = (char)0x1c)
         {
-            ///<summary>
-            ///This constructor needs a directly encoded data field or just 1 unencoded string
-            ///</summary>
-
             delimiter = newDelimiter;
             packetHeader = newHeader;
             data = newData;
         }
+        ///<summary>
+        ///This constructor requires a list of strings that will be encoded afterwards
+        ///</summary>
         public Packet(PacketHeader newHeader, List<string> newData, char newDelimiter = (char)0x1c)
         {
-            ///<summary>
-            ///This constructor requires a list of strings that will be encoded afterwards
-            ///</summary>
-
             delimiter = newDelimiter;
             packetHeader = newHeader;
             data = Parser.EncodeMessage(newData, delimiter);
+        }
+        ///<summary>
+        ///This constructor requires a ListClass that will be encoded afterwards
+        ///</summary>
+        public Packet(PacketHeader newHeader, ListClass newData, char newDelimiter = (char)0x1c)
+        {
+            delimiter = newDelimiter;
+            packetHeader = newHeader;
+            data = Parser.EncodeMessage(newData.GetList(), delimiter);
         }
         public void SetHeader(PacketHeader newHeader, char newDelimiter = (char)0x1c)
         {

@@ -21,13 +21,16 @@ namespace Server
         {
             tcpListener.Start();
             logger.WriteLine("Server online");
-            int numberOfClients = 10; /*int.Parse(Console.ReadLine());*/
+            int numberOfClients = 10;
             for (int i = 0; i < numberOfClients; i++)
             {
                 Thread newThread = new Thread(new ThreadStart(Listeners));
                 newThread.Start();
             }
         }
+        /// <summary>
+        /// Socket initializer function
+        /// </summary>
         static void Listeners()
         {
 
@@ -44,6 +47,12 @@ namespace Server
             
             socketForClient.Close();
         }
+        /// <summary>
+        /// Checks wether the user exists and notifies the end user if it's 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="streamWriter"></param>
         static void LoginFunction(string userName, string password, ref StreamWriter streamWriter)
         {
             Packet loginPacket = new Packet();
@@ -61,7 +70,42 @@ namespace Server
             loginPacket.SetHeader(response);
             streamWriter.WriteLine(loginPacket.ToString());
             streamWriter.Flush();
+            if (response == PacketHeader.LoginResponsePositive)
+                SendClientDetails(userName, ref streamWriter);
         }
+        /// <summary>
+        /// Send the client's details of his account
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="streamWriter"></param>
+        static void SendClientDetails(string userName, ref StreamWriter streamWriter)
+        {
+            Packet detailsPacket = new Packet(PacketHeader.SendClientDetails, 
+                sqlManager.GetUserDetails(userName));
+            streamWriter.WriteLine(detailsPacket.ToString());
+            streamWriter.Flush();
+
+        }
+        /// <summary>
+        /// Method for sending all credentials meant for the user
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="streamWriter"></param>
+        static void SendClientCredentials(string userName, ref StreamWriter streamWriter)
+        {
+            Packet credentialsPacket = new Packet(PacketHeader.SendClientCredentials,
+                sqlManager.GetUserCredentialList(userName));
+
+            streamWriter.WriteLine(credentialsPacket.ToString());
+            streamWriter.Flush();
+        }
+        /// <summary>
+        /// Main function for processing all requests coming from the TCP Client
+        /// </summary>
+        /// <param name="socketForClient"></param>
+        /// <param name="networkStream"></param>
+        /// <param name="streamWriter"></param>
+        /// <param name="streamReader"></param>
         static void ProcessRequest(ref Socket socketForClient, ref NetworkStream networkStream, 
             ref StreamWriter streamWriter, ref StreamReader streamReader)
         {
@@ -93,6 +137,7 @@ namespace Server
                             }
                     }
                 }
+                
                 streamReader.Close();
                 networkStream.Close();
                 streamWriter.Close();

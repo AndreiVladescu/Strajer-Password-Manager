@@ -37,7 +37,16 @@ namespace Client
                 Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
                 
                 if (recvPacket.GetHeader() == PacketHeader.LoginResponsePositive)
+                {
                     LblStatus.Text = "Connected";
+                    var frm = new MainWindow();
+                    frm.Location = this.Location;
+                    frm.StartPosition = FormStartPosition.Manual;
+                    frm.FormClosing += delegate { this.Show(); };
+                    frm.Show();
+                    this.Hide();
+                }
+                    
                 else
                     LblStatus.Text = "Could not connect";
             }
@@ -45,6 +54,11 @@ namespace Client
             {
 
             }
+        }
+
+        private void CheckBoxPasswordVisibility_CheckedChanged(object sender, EventArgs e)
+        {
+            TextBoxPassword.PasswordChar = CheckBoxPasswordVisibility.Checked ? '\0' : '*';
         }
     }
 }

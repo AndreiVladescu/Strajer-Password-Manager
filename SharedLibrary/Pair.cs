@@ -9,8 +9,6 @@ namespace SharedLibrary
     public class Pair<T1,T2>
     {
         // Tuple-like class, but mutable
-        T1 t1;
-        T2 t2;
         public Pair(T1 t1, T2 t2)
         {
             Item1 = t1;

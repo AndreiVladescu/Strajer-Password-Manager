@@ -31,5 +31,15 @@ namespace Client
                 Console.WriteLine("Exception reading from Server");
             }
         }
+
+        private void BtnSignOff_Click(object sender, EventArgs e)
+        {
+            var frm = new Login();
+            frm.Location = this.Location;
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.FormClosing += delegate { this.Show(); };
+            frm.Show();
+            this.Hide();
+        }
     }
 }
