@@ -106,7 +106,7 @@ namespace Server
             command = new SqlCommand();
             connection.Open();
             command.Connection = connection;
-            command.CommandText = "select * from Account where Account.UserName = '" +
+            command.CommandText = "select ID, UserName, RoleID, Email from Account where Account.UserName = '" +
             username +
             "' or Account.Email = '" + 
             username +

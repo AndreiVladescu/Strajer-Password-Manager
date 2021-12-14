@@ -70,8 +70,12 @@ namespace Server
             loginPacket.SetHeader(response);
             streamWriter.WriteLine(loginPacket.ToString());
             streamWriter.Flush();
+
             if (response == PacketHeader.LoginResponsePositive)
+            {
                 SendClientDetails(userName, ref streamWriter);
+                SendClientCredentials(userName, ref streamWriter);
+            }
         }
         /// <summary>
         /// Send the client's details of his account
@@ -82,9 +86,9 @@ namespace Server
         {
             Packet detailsPacket = new Packet(PacketHeader.SendClientDetails, 
                 sqlManager.GetUserDetails(userName));
+
             streamWriter.WriteLine(detailsPacket.ToString());
             streamWriter.Flush();
-
         }
         /// <summary>
         /// Method for sending all credentials meant for the user

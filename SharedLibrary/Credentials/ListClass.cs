@@ -6,6 +6,21 @@ using System.Threading.Tasks;
 
 namespace SharedLibrary
 {
+    public struct ListInfo
+    {
+        public List<string> ListNames { get; set; }
+        public int numberOfLists { get; set; }
+        public void initListInfo()
+        {
+            ListNames = new List<string>();
+            numberOfLists = 0;
+        }
+        public void addList(string listName)
+        {
+            ListNames.Add(listName);
+            numberOfLists++;
+        }
+    }
     public class ListClass
     {
         public List<CredentialClass> credentialList { get; set; }
@@ -43,6 +58,16 @@ namespace SharedLibrary
                 {
                     returnList.Add(tempList[j]);
                 }
+            }
+
+            return returnList;
+        }
+        public List<List<string>> GetListOfLists()
+        {
+            List<List<string>> returnList = new List<List<string>>();
+            for (int i = 0; i < credentialList.Count; i++)
+            {
+                returnList.Add(credentialList[i].GetList());
             }
 
             return returnList;

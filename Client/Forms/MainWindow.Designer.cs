@@ -29,80 +29,112 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnSignOff = new System.Windows.Forms.Button();
-            this.DataGridPasswords = new System.Windows.Forms.DataGridView();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridPasswords)).BeginInit();
+            this.SidePanel = new System.Windows.Forms.Panel();
+            this.CloseBtn = new System.Windows.Forms.Button();
+            this.PrevBtn = new System.Windows.Forms.Button();
+            this.NextBtn = new System.Windows.Forms.Button();
+            this.SignOffBtn = new System.Windows.Forms.Button();
+            this.DesktopPanel = new System.Windows.Forms.Panel();
+            this.SidePanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // SidePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(52)))), ((int)(((byte)(103)))));
-            this.panel1.Controls.Add(this.BtnSignOff);
-            this.panel1.Location = new System.Drawing.Point(-3, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 543);
-            this.panel1.TabIndex = 0;
+            this.SidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(52)))), ((int)(((byte)(103)))));
+            this.SidePanel.Controls.Add(this.CloseBtn);
+            this.SidePanel.Controls.Add(this.PrevBtn);
+            this.SidePanel.Controls.Add(this.NextBtn);
+            this.SidePanel.Controls.Add(this.SignOffBtn);
+            this.SidePanel.Location = new System.Drawing.Point(-2, 0);
+            this.SidePanel.Name = "SidePanel";
+            this.SidePanel.Size = new System.Drawing.Size(151, 501);
+            this.SidePanel.TabIndex = 0;
             // 
-            // BtnSignOff
+            // CloseBtn
             // 
-            this.BtnSignOff.BackColor = System.Drawing.Color.Teal;
-            this.BtnSignOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSignOff.Font = new System.Drawing.Font("Constantia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSignOff.Location = new System.Drawing.Point(4, 490);
-            this.BtnSignOff.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.BtnSignOff.Name = "BtnSignOff";
-            this.BtnSignOff.Size = new System.Drawing.Size(197, 43);
-            this.BtnSignOff.TabIndex = 1;
-            this.BtnSignOff.Text = "Sign Off";
-            this.BtnSignOff.UseVisualStyleBackColor = false;
-            this.BtnSignOff.Click += new System.EventHandler(this.BtnSignOff_Click);
+            this.CloseBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseBtn.Font = new System.Drawing.Font("Segoe UI Historic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseBtn.Location = new System.Drawing.Point(3, 463);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(148, 35);
+            this.CloseBtn.TabIndex = 4;
+            this.CloseBtn.Text = "Close App";
+            this.CloseBtn.UseVisualStyleBackColor = false;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseApplication);
             // 
-            // DataGridPasswords
+            // PrevBtn
             // 
-            this.DataGridPasswords.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(95)))), ((int)(((byte)(137)))));
-            this.DataGridPasswords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridPasswords.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DataGridPasswords.Location = new System.Drawing.Point(211, 15);
-            this.DataGridPasswords.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.DataGridPasswords.Name = "DataGridPasswords";
-            this.DataGridPasswords.RowHeadersWidth = 51;
-            this.DataGridPasswords.Size = new System.Drawing.Size(840, 511);
-            this.DataGridPasswords.TabIndex = 1;
+            this.PrevBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.PrevBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PrevBtn.Font = new System.Drawing.Font("Segoe UI Historic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PrevBtn.Location = new System.Drawing.Point(3, 71);
+            this.PrevBtn.Name = "PrevBtn";
+            this.PrevBtn.Size = new System.Drawing.Size(148, 35);
+            this.PrevBtn.TabIndex = 3;
+            this.PrevBtn.Text = "Prev List";
+            this.PrevBtn.UseVisualStyleBackColor = false;
+            this.PrevBtn.Click += new System.EventHandler(this.PrevList);
+            // 
+            // NextBtn
+            // 
+            this.NextBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.NextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NextBtn.Font = new System.Drawing.Font("Segoe UI Historic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NextBtn.Location = new System.Drawing.Point(3, 30);
+            this.NextBtn.Name = "NextBtn";
+            this.NextBtn.Size = new System.Drawing.Size(148, 35);
+            this.NextBtn.TabIndex = 2;
+            this.NextBtn.Text = "Next List";
+            this.NextBtn.UseVisualStyleBackColor = false;
+            this.NextBtn.Click += new System.EventHandler(this.NextList);
+            // 
+            // SignOffBtn
+            // 
+            this.SignOffBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.SignOffBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SignOffBtn.Font = new System.Drawing.Font("Segoe UI Historic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SignOffBtn.Location = new System.Drawing.Point(0, 422);
+            this.SignOffBtn.Name = "SignOffBtn";
+            this.SignOffBtn.Size = new System.Drawing.Size(148, 35);
+            this.SignOffBtn.TabIndex = 1;
+            this.SignOffBtn.Text = "Sign Off";
+            this.SignOffBtn.UseVisualStyleBackColor = false;
+            this.SignOffBtn.Click += new System.EventHandler(this.SignOff);
+            // 
+            // DesktopPanel
+            // 
+            this.DesktopPanel.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.DesktopPanel.Location = new System.Drawing.Point(155, 0);
+            this.DesktopPanel.Name = "DesktopPanel";
+            this.DesktopPanel.Size = new System.Drawing.Size(1099, 501);
+            this.DesktopPanel.TabIndex = 1;
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(79)))), ((int)(((byte)(138)))));
-            this.ClientSize = new System.Drawing.Size(1067, 540);
-            this.Controls.Add(this.DataGridPasswords);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1266, 513);
+            this.Controls.Add(this.DesktopPanel);
+            this.Controls.Add(this.SidePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainWindow";
             this.Text = "Străjer";
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridPasswords)).EndInit();
+            this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.SidePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BtnSignOff;
-        private System.Windows.Forms.DataGridView DataGridPasswords;
+        private System.Windows.Forms.Panel SidePanel;
+        private System.Windows.Forms.Button SignOffBtn;
+        private System.Windows.Forms.Button CloseBtn;
+        private System.Windows.Forms.Button PrevBtn;
+        private System.Windows.Forms.Button NextBtn;
+        private System.Windows.Forms.Panel DesktopPanel;
     }
 }
 
