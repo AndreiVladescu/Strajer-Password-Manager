@@ -22,7 +22,14 @@ namespace Client
         }
         private void InitDesign()
         {
-            this.LblListName.Text = listID.ToString();
+            //dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            if (Int32.Parse(ClientMain.account.RoleID) != 1)
+            {
+                dataGrid.ReadOnly = true;
+                //dataGrid.AllowUserToAddRows = true;
+                //dataGrid.AllowUserToDeleteRows = true;
+            }
+            LblListName.Text = listID.ToString();
         }
         private void ListForm_Load(object sender, EventArgs e)
         {
@@ -55,8 +62,6 @@ namespace Client
             dataGrid.Columns.Add("Date Added", "Date Added");
             dataGrid.Columns.Add("Notes", "Notes");
 
-            //dataGrid.Rows.Add("Titlu", "Addresa", "Paass", "User", "date", "Note");
-            // this.dataGrid.DataSource = ClientMain.credentialsList.GetListOfLists();
             var tempListOfLists = ClientMain.credentialsList.GetListOfLists();
             foreach (var tempList in tempListOfLists)
                 if (listID == Int32.Parse(tempList[1]))

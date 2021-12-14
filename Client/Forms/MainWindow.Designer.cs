@@ -104,6 +104,9 @@ namespace Client
             // 
             // DesktopPanel
             // 
+            this.DesktopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DesktopPanel.BackColor = System.Drawing.Color.CornflowerBlue;
             this.DesktopPanel.Location = new System.Drawing.Point(155, 0);
             this.DesktopPanel.Name = "DesktopPanel";
@@ -118,7 +121,6 @@ namespace Client
             this.ClientSize = new System.Drawing.Size(1266, 513);
             this.Controls.Add(this.DesktopPanel);
             this.Controls.Add(this.SidePanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MainWindow";
             this.Text = "Străjer";
             this.Load += new System.EventHandler(this.MainWindow_Load);
