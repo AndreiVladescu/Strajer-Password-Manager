@@ -71,16 +71,38 @@ namespace Client
         private void MainWindow_Load(object sender, EventArgs e)
         {
             listID = 0;
-            numberOfLists = ClientMain.listInfo.numberOfLists;
-            InitLists();
+            var uniqList = UniqueLists();
+            numberOfLists = ClientMain.listInfo.uniqueLists;
+            InitLists(uniqList);
             OpenChildForm(listForms[listID], DesktopPanel);
         }
-        private void InitLists()
+
+        private List<string> UniqueLists()
+        {
+            List<string> uniqListID = new List<string>();
+            var tempList = ClientMain.credentialsList.GetListOfLists();
+            for (int i = 0; i < ClientMain.listInfo.numberOfLists; i++) 
+            {
+                bool seal = true;
+                for (int j = 0; j < uniqListID.Count; j++)
+                    if(uniqListID[j] == tempList[i][1])
+                    {
+                        seal = false;
+                        break;
+                    }
+                if (seal)
+                    uniqListID.Add(tempList[i][1]);
+            }
+            ClientMain.listInfo.uniqueLists = uniqListID.Count;
+            return uniqListID;
+        }
+
+        private void InitLists(List<string> uniqList)
         {
             listForms = new List<ListForm>();
-            for (int i = 0; i < numberOfLists; i++)
+            for (int i = 0; i < uniqList.Count; i++)
             {
-                ListForm tempList = new ListForm(i);
+                ListForm tempList = new ListForm(Int32.Parse(uniqList[i]));
                 listForms.Add(tempList);
             }
         }

@@ -59,7 +59,9 @@ namespace Client
             // this.dataGrid.DataSource = ClientMain.credentialsList.GetListOfLists();
             var tempListOfLists = ClientMain.credentialsList.GetListOfLists();
             foreach (var tempList in tempListOfLists)
-                dataGrid.Rows.Add(tempList[6], tempList[5], tempList[3], tempList[4], tempList[2], tempList[7]);
+                if (listID == Int32.Parse(tempList[1]))
+                    dataGrid.Rows.Add(tempList[6], tempList[5], tempList[3], tempList[4], tempList[2], tempList[7]);
+                
         }
     }
 }

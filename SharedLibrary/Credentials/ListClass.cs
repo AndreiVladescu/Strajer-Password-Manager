@@ -10,6 +10,7 @@ namespace SharedLibrary
     {
         public List<string> ListNames { get; set; }
         public int numberOfLists { get; set; }
+        public int uniqueLists { get; set; }
         public void initListInfo()
         {
             ListNames = new List<string>();
