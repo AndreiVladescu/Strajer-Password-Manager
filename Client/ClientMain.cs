@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SharedLibrary;
+using System;
 using System.Windows.Forms;
-using SharedLibrary;
 
 namespace Client
 {
     static class ClientMain
     {
+        //public static Login loginForm = new Login();
         public static NetworkTCPClient client = new NetworkTCPClient();
         public static AccountClass account = new AccountClass();
         public static ListClass credentialsList = new ListClass();

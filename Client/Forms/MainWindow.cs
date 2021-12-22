@@ -1,15 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
 
 namespace Client
 {
@@ -26,14 +17,21 @@ namespace Client
 
         private void SignOff(object sender, EventArgs e)
         {
-            var frm = new Login();
-            frm.Location = this.Location;
-            frm.StartPosition = FormStartPosition.Manual;
-            frm.FormClosing += delegate { this.Show(); };
-            frm.Show();
-            this.Hide();
+            try
+            {
+                var frm = new Login();
+                frm.Location = this.Location;
+                frm.StartPosition = FormStartPosition.Manual;
+                frm.FormClosing += delegate { this.Show(); };
+                frm.Show();
+                this.Hide();
+            }
+            catch (Exception)
+            {
+
+            }
         }
-         private void OpenChildForm(Form childForm, object btnSender)
+        private void OpenChildForm(Form childForm, object btnSender)
         {
             //if (activeForm != null)
             //    activeForm.Close();
@@ -49,6 +47,8 @@ namespace Client
 
         private void NextList(object sender, EventArgs e)
         {
+            if (numberOfLists == 0)
+                return;
             listID++;
             if (listID == numberOfLists)
                 listID = 0;
@@ -57,6 +57,8 @@ namespace Client
 
         private void PrevList(object sender, EventArgs e)
         {
+            if (numberOfLists == 0)
+                return;
             listID--;
             if (listID == -1)
                 listID = numberOfLists - 1;
@@ -74,18 +76,19 @@ namespace Client
             var uniqList = UniqueLists();
             numberOfLists = ClientMain.listInfo.uniqueLists;
             InitLists(uniqList);
-            OpenChildForm(listForms[listID], DesktopPanel);
+            if (numberOfLists != 0)
+                OpenChildForm(listForms[listID], DesktopPanel);
         }
 
         private List<string> UniqueLists()
         {
             List<string> uniqListID = new List<string>();
             var tempList = ClientMain.credentialsList.GetListOfLists();
-            for (int i = 0; i < ClientMain.listInfo.numberOfLists; i++) 
+            for (int i = 0; i < ClientMain.listInfo.numberOfLists; i++)
             {
                 bool seal = true;
                 for (int j = 0; j < uniqListID.Count; j++)
-                    if(uniqListID[j] == tempList[i][1])
+                    if (uniqListID[j] == tempList[i][1])
                     {
                         seal = false;
                         break;

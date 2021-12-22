@@ -1,11 +1,9 @@
-﻿using System;
-using System.Text;
+﻿using SharedLibrary;
+using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.Generic;
 using System.Threading;
-using System.IO;
-using SharedLibrary;
 
 namespace Server
 {
@@ -42,9 +40,9 @@ namespace Server
                 StreamWriter streamWriter = new StreamWriter(networkStream);
                 StreamReader streamReader = new StreamReader(networkStream);
 
-                ProcessRequest(ref socketForClient,ref networkStream, ref streamWriter, ref streamReader);
+                ProcessRequest(ref socketForClient, ref networkStream, ref streamWriter, ref streamReader);
             }
-            
+
             socketForClient.Close();
         }
         /// <summary>
@@ -84,7 +82,7 @@ namespace Server
         /// <param name="streamWriter"></param>
         static void SendClientDetails(string userName, ref StreamWriter streamWriter)
         {
-            Packet detailsPacket = new Packet(PacketHeader.SendClientDetails, 
+            Packet detailsPacket = new Packet(PacketHeader.SendClientDetails,
                 sqlManager.GetUserDetails(userName));
 
             streamWriter.WriteLine(detailsPacket.ToString());
@@ -110,7 +108,7 @@ namespace Server
         /// <param name="networkStream"></param>
         /// <param name="streamWriter"></param>
         /// <param name="streamReader"></param>
-        static void ProcessRequest(ref Socket socketForClient, ref NetworkStream networkStream, 
+        static void ProcessRequest(ref Socket socketForClient, ref NetworkStream networkStream,
             ref StreamWriter streamWriter, ref StreamReader streamReader)
         {
             try
@@ -141,7 +139,7 @@ namespace Server
                             }
                     }
                 }
-                
+
                 streamReader.Close();
                 networkStream.Close();
                 streamWriter.Close();
@@ -151,6 +149,6 @@ namespace Server
                 logger.WriteLine("Client " + socketForClient.RemoteEndPoint.ToString() + " disconnected");
             }
         }
-        
+
     }
 }

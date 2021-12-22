@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedLibrary
 {
@@ -16,13 +14,13 @@ namespace SharedLibrary
              *1f  US  ␟  ^_  Unit Separator
              */
             List<string> decodedMessage = new List<string>(encodedString.Split(delimiter));
-            
+
             return decodedMessage;
         }
         static public string EncodeMessage(List<string> listOfStrings, char delimiter)
         {
             string returnString = "";
-            for (int i = 0; i < listOfStrings.Count(); i++) 
+            for (int i = 0; i < listOfStrings.Count(); i++)
             {
                 returnString += listOfStrings[i];
                 if (i != listOfStrings.Count() - 1)
@@ -32,7 +30,7 @@ namespace SharedLibrary
         }
         static public Pair<PacketHeader, string> SplitPacket(string packetData, char delimiter = (char)0x1c)
         {
-            Pair<PacketHeader, string> splitPacket = new Pair<PacketHeader, string>(PacketHeader.NoAction,"");
+            Pair<PacketHeader, string> splitPacket = new Pair<PacketHeader, string>(PacketHeader.NoAction, "");
 
             string str = packetData.Split(delimiter)[0];
             splitPacket.Item1 = (PacketHeader)Convert.ToInt32(str);

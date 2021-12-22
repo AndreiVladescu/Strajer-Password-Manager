@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharedLibrary;
 
 namespace Client
 {
     public partial class ListForm : Form
     {
         private int listID;
-        
+
         public ListForm(int newListID)
         {
             listID = newListID;
@@ -50,7 +42,7 @@ namespace Client
             //this.dataGrid.Columns[6].Width = 200;
 
             InitDesign();
-            
+
         }
 
         private void LoadCredentials()
@@ -66,7 +58,7 @@ namespace Client
             foreach (var tempList in tempListOfLists)
                 if (listID == Int32.Parse(tempList[1]))
                     dataGrid.Rows.Add(tempList[6], tempList[5], tempList[3], tempList[4], tempList[2], tempList[7]);
-                
+
         }
     }
 }

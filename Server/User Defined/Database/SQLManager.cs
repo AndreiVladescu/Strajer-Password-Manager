@@ -1,11 +1,7 @@
-﻿using System;
+﻿using SharedLibrary;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using SharedLibrary;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace Server
 {
@@ -46,13 +42,13 @@ namespace Server
             command = new SqlCommand();
             connection.Open();
             command.Connection = connection;
-            command.CommandText = "select ID from Account where (Password = '" 
+            command.CommandText = "select ID from Account where (Password = '"
                 + password
                 + "' and UserName = '"
                 + loginName
                 + "') or(Password = '"
                 + password
-                + "' and Email = '" 
+                + "' and Email = '"
                 + loginName
                 + "')";
 
@@ -88,7 +84,7 @@ namespace Server
             dataReader = command.ExecuteReader();
             while (dataReader.Read())
                 credentialList.AddCredentialSlot(ReadSingleRow((IDataRecord)dataReader));
-                //credentialList = credentialList + ReadSingleRow((IDataRecord)dataReader);
+            //credentialList = credentialList + ReadSingleRow((IDataRecord)dataReader);
 
             connection.Close();
             return credentialList;
@@ -108,7 +104,7 @@ namespace Server
             command.Connection = connection;
             command.CommandText = "select ID, UserName, RoleID, Email from Account where Account.UserName = '" +
             username +
-            "' or Account.Email = '" + 
+            "' or Account.Email = '" +
             username +
             "'";
 

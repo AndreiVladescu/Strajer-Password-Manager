@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLibrary
+﻿namespace SharedLibrary
 {
-    public class Pair<T1,T2>
+    public class Pair<T1, T2>
     {
         // Tuple-like class, but mutable
         public Pair(T1 t1, T2 t2)

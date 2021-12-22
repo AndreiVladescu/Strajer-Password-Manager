@@ -1,19 +1,13 @@
-﻿using System;
+﻿using SharedLibrary;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using SharedLibrary;
 
 namespace Client
 {
     public partial class Login : Form
     {
+        public static MainWindow mainWindow = new MainWindow();
         public Login()
         {
             InitializeComponent();
@@ -35,7 +29,7 @@ namespace Client
 
                 string recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
                 Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
-                
+
                 if (recvPacket.GetHeader() == PacketHeader.LoginResponsePositive)
                 {
                     recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
@@ -48,6 +42,7 @@ namespace Client
 
                     //TODO resolve switching forms
                     LblStatus.Text = "Connected";
+                    //var frm = mainWindow;
                     var frm = new MainWindow();
                     frm.Location = this.Location;
                     frm.StartPosition = FormStartPosition.Manual;
@@ -58,7 +53,7 @@ namespace Client
                 else
                     LblStatus.Text = "Could not connect";
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }

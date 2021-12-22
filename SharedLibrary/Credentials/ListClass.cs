@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SharedLibrary
 {
@@ -42,7 +38,7 @@ namespace SharedLibrary
             CredentialClass tempCredential = new CredentialClass(credentialSlot);
             this.credentialList.Add(tempCredential);
         }
-        static public ListClass operator+ (ListClass listClass, List<string> additionalCredentialList)
+        static public ListClass operator +(ListClass listClass, List<string> additionalCredentialList)
         {
             ListClass returnedListClass = new ListClass();
             returnedListClass = listClass;
