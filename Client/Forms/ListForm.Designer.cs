@@ -39,9 +39,10 @@ namespace Client
             // 
             this.LblListName.AutoSize = true;
             this.LblListName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblListName.Location = new System.Drawing.Point(12, 9);
+            this.LblListName.Location = new System.Drawing.Point(16, 11);
+            this.LblListName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblListName.Name = "LblListName";
-            this.LblListName.Size = new System.Drawing.Size(98, 20);
+            this.LblListName.Size = new System.Drawing.Size(123, 25);
             this.LblListName.TabIndex = 0;
             this.LblListName.Text = "<List Name>";
             // 
@@ -49,24 +50,27 @@ namespace Client
             // 
             this.dataGrid.AllowUserToAddRows = false;
             this.dataGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(12, 60);
+            this.dataGrid.Location = new System.Drawing.Point(16, 74);
+            this.dataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.RowHeadersVisible = false;
-            this.dataGrid.Size = new System.Drawing.Size(1075, 406);
+            this.dataGrid.RowHeadersWidth = 51;
+            this.dataGrid.Size = new System.Drawing.Size(1433, 500);
             this.dataGrid.TabIndex = 1;
             // 
             // ListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1099, 478);
+            this.ClientSize = new System.Drawing.Size(1465, 588);
             this.Controls.Add(this.dataGrid);
             this.Controls.Add(this.LblListName);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ListForm";
             this.Text = "ListForm";
             this.Load += new System.EventHandler(this.ListForm_Load);

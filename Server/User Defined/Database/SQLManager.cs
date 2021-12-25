@@ -24,11 +24,10 @@ namespace Server
         /// <param name="dataRecord"></param>
         private static List<string> ReadSingleRow(IDataRecord dataRecord)
         {
-            // TODO
             List<string> returnList = new List<string>();
             for (int i = 0; i < dataRecord.FieldCount; i++)
                 returnList.Add(dataRecord[i].ToString());
-            //Console.WriteLine(String.Format("{0}, {1}", dataRecord[0], dataRecord[1]));
+
             return returnList;
         }
         /// <summary>
@@ -108,6 +107,57 @@ namespace Server
             return credentialList;
         }
 
+        public void InsertCredentialSlot(string listId, string password, string username,
+            string address, string title, string notes)
+        {
+
+            command = new SqlCommand();
+            connection.Open();
+            command.Connection = connection;
+            command.CommandText = "insert into Credentials(ListID, Password, UserName, Address, Title, Notes, TimeStamp) " +
+               "values (" +
+               listId + ", '" +
+               password + "', '" +
+               username + "', '" +
+               address + "', '" +
+               title + "', '" +
+               notes + "', " +
+               "GETDATE())";
+
+            command.ExecuteReader();
+
+            connection.Close();
+        }
+        public void AddUserToList(string listId, string userId)
+        {
+
+            command = new SqlCommand();
+            connection.Open();
+            command.Connection = connection;
+            command.CommandText = "insert into AccountListMerge(ListID, AccountID) " +
+               "values (" +
+               listId +
+               ", " +
+               userId + 
+               ")";
+
+            command.ExecuteReader();
+            connection.Close();
+        }
+        public void AddNewList(string listName)
+        {
+
+            command = new SqlCommand();
+            connection.Open();
+            command.Connection = connection;
+            command.CommandText = "insert into List(Name) " +
+               "values ('" +
+               listName +
+               "')";
+
+            command.ExecuteReader();
+            connection.Close();
+        }
         private string GetUserRole(string username)
         {
             string role = new string("");

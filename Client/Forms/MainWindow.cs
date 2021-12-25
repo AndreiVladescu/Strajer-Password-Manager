@@ -10,9 +10,9 @@ namespace Client
         private Form activeForm;
         private int listID;
         private int numberOfLists;
-        private static bool genPassBtnStatus = false;
         List<ListForm> listForms;
         GenPassForm passForm = new GenPassForm();
+        AddItemForm itemForm = new AddItemForm();
 
         public MainWindow()
         {
@@ -76,13 +76,23 @@ namespace Client
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            this.passForm.Visible = false;
+            UpdateOnRoleGUI();
+            passForm.Visible = false;
             listID = 0;
             var uniqList = UniqueLists();
             numberOfLists = ClientMain.listInfo.uniqueLists;
             InitLists(uniqList);
             if (numberOfLists != 0)
                 OpenChildForm(listForms[listID], DesktopPanel);
+        }
+
+        private void UpdateOnRoleGUI()
+        {
+            if (Int32.Parse(ClientMain.account.RoleID) != 1)
+            {
+                this.btnGenPass.Visible = false;
+                this.btnDatabaseModify.Visible = false;
+            }
         }
 
         private List<string> UniqueLists()
@@ -119,6 +129,11 @@ namespace Client
         private void GeneratePassword(object sender, EventArgs e)
         {
             passForm.Visible = !passForm.Visible;
+        }
+
+        private void btnDatabaseModify_Click(object sender, EventArgs e)
+        {
+            itemForm.Visible = !itemForm.Visible;
         }
     }
 }
