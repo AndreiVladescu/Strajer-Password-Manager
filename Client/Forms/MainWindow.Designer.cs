@@ -35,12 +35,14 @@ namespace Client
             this.NextBtn = new System.Windows.Forms.Button();
             this.SignOffBtn = new System.Windows.Forms.Button();
             this.DesktopPanel = new System.Windows.Forms.Panel();
+            this.btnGenPass = new System.Windows.Forms.Button();
             this.SidePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SidePanel
             // 
             this.SidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(52)))), ((int)(((byte)(103)))));
+            this.SidePanel.Controls.Add(this.btnGenPass);
             this.SidePanel.Controls.Add(this.CloseBtn);
             this.SidePanel.Controls.Add(this.PrevBtn);
             this.SidePanel.Controls.Add(this.NextBtn);
@@ -113,6 +115,19 @@ namespace Client
             this.DesktopPanel.Size = new System.Drawing.Size(1099, 501);
             this.DesktopPanel.TabIndex = 1;
             // 
+            // btnGenPass
+            // 
+            this.btnGenPass.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnGenPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenPass.Font = new System.Drawing.Font("Segoe UI Historic", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenPass.Location = new System.Drawing.Point(1, 233);
+            this.btnGenPass.Name = "btnGenPass";
+            this.btnGenPass.Size = new System.Drawing.Size(148, 60);
+            this.btnGenPass.TabIndex = 5;
+            this.btnGenPass.Text = "Generate Password";
+            this.btnGenPass.UseVisualStyleBackColor = false;
+            this.btnGenPass.Click += new System.EventHandler(this.GeneratePassword);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,6 +152,7 @@ namespace Client
         private System.Windows.Forms.Button PrevBtn;
         private System.Windows.Forms.Button NextBtn;
         private System.Windows.Forms.Panel DesktopPanel;
+        private System.Windows.Forms.Button btnGenPass;
     }
 }
 

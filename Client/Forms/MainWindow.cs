@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
+
 namespace Client
 {
     public partial class MainWindow : Form
@@ -18,6 +19,7 @@ namespace Client
         private Form activeForm;
         private int listID;
         private int numberOfLists;
+        private static bool genPassBtnStatus = false;
         List<ListForm> listForms;
         public MainWindow()
         {
@@ -104,6 +106,15 @@ namespace Client
             {
                 ListForm tempList = new ListForm(Int32.Parse(uniqList[i]));
                 listForms.Add(tempList);
+            }
+        }
+
+        private void GeneratePassword(object sender, EventArgs e)
+        {
+            genPassBtnStatus = !genPassBtnStatus;
+            if(genPassBtnStatus)
+            {
+                var frm = new GenPassForm();
             }
         }
     }
