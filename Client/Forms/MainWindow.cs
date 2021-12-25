@@ -12,6 +12,8 @@ namespace Client
         private int numberOfLists;
         private static bool genPassBtnStatus = false;
         List<ListForm> listForms;
+        GenPassForm passForm = new GenPassForm();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -74,7 +76,7 @@ namespace Client
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            this.UpdateServerBtn.Visible = false;
+            this.passForm.Visible = false;
             listID = 0;
             var uniqList = UniqueLists();
             numberOfLists = ClientMain.listInfo.uniqueLists;
@@ -116,11 +118,7 @@ namespace Client
 
         private void GeneratePassword(object sender, EventArgs e)
         {
-            genPassBtnStatus = !genPassBtnStatus;
-            if(genPassBtnStatus)
-            {
-                var frm = new GenPassForm();
-            }
+            passForm.Visible = !passForm.Visible;
         }
     }
 }

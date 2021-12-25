@@ -122,7 +122,7 @@ namespace Client
             string randul = new string(result.ToString().OrderBy(s => (num.Next(2) % 2) == 0).ToArray());
             textbox.Text = randul.ToString();
             int x=(int) Math.Log(possibleP, 2);
-            textbox3.Text = x.ToString();
+            lblBits.Text = x.ToString();
             if (x < 28)
                 label7.Text = "Very Weak; might\n keep out family members";
             if (x >= 28 && x < 35)
@@ -170,7 +170,7 @@ namespace Client
             if (ore > 8760)
                 ani = ore / 8760;
             int x = (int)Math.Log(possibleP, 2);
-            textbox3.Text = x.ToString();
+            lblBits.Text = x.ToString();
             if (x < 28)
                 label7.Text = "Very Weak; might\n keep out family members";
             if (x >= 28 && x < 35)
@@ -184,6 +184,11 @@ namespace Client
             label8.Text = "The password would be cracked in " + ore.ToString() + " hours";
             if (ani != 0)
                 label8.Text = "The password would be cracked in " + ani.ToString() + " years";
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }
     }
 }
