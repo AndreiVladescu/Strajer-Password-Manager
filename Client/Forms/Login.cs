@@ -74,13 +74,13 @@ namespace Client
         private void InitLists(Packet listsPacket)
         {
             var decodedMessageList = listsPacket.GetDecodedMessage();
-            // 8 = number of fields per credential slot
-            int numberOfLists = decodedMessageList.Count / 8;
+            // 9 = number of fields per credential slot
+            int numberOfLists = decodedMessageList.Count / 9;
             for (int i = 0; i < numberOfLists; i++)
             {
                 List<string> credList = new List<string>();
-                for (int j = 0; j < 8; j++)
-                    credList.Add(decodedMessageList[i * 8 + j]);
+                for (int j = 0; j < 9; j++)
+                    credList.Add(decodedMessageList[i * 9 + j]);
                 ClientMain.credentialsList.AddCredentialSlot(credList);
             }
             ClientMain.listInfo.numberOfLists = numberOfLists;

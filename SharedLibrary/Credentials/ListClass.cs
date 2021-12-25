@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SharedLibrary
 {
@@ -28,6 +29,16 @@ namespace SharedLibrary
         public ListClass(List<CredentialClass> newList)
         {
             credentialList = newList;
+        }
+        public string GetListName(int listID)
+        {
+            foreach (var credentialSlot in credentialList)
+            {
+                var auxList = credentialSlot.GetList();
+                if (Int32.Parse(auxList[1]) == listID)
+                    return auxList[8];
+            }
+            return "";
         }
         public void AddCredentialSlot(CredentialClass credentialClass)
         {

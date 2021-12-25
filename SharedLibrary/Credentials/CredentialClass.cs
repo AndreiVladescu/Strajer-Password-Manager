@@ -6,6 +6,7 @@ namespace SharedLibrary
     {
         public string ID { get; set; }
         public string listID { get; set; }
+        public string listName { get; set; }
         public string timeStamp { get; set; }
         public string password { get; set; }
         public string userName { get; set; }
@@ -27,6 +28,7 @@ namespace SharedLibrary
             address = unencodedList[5];
             title = unencodedList[6];
             notes = unencodedList[7];
+            listName = unencodedList[8];
         }
         /// <summary>
         /// Returns a list of all details
@@ -35,7 +37,7 @@ namespace SharedLibrary
         public List<string> GetList()
         {
             List<string> credentialList = new List<string> { ID, listID, timeStamp, password,
-                userName, address, title, notes };
+                userName, address, title, notes, listName};
 
             return credentialList;
         }

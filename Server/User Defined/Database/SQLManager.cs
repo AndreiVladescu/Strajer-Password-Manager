@@ -1,7 +1,9 @@
-﻿using SharedLibrary;
+﻿using Scrypt;
+using SharedLibrary;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace Server
 {
@@ -35,26 +37,29 @@ namespace Server
         /// <param name="loginName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool Login(string loginName, string password)
+        public bool Login(string loginName, string password, string salt = "Y7-9v")
         {
             bool status = false;
+            RandomNumberGenerator saltRng = RandomNumberGenerator.Create();
+            ScryptEncoder hasher = new ScryptEncoder(4, 8, 2, saltRng);
+
             //Posibility to login with username or email
             command = new SqlCommand();
             connection.Open();
             command.Connection = connection;
-            command.CommandText = "select ID from Account where (Password = '"
-                + password
-                + "' and UserName = '"
+            command.CommandText = "select Password from Account where UserName = '"
                 + loginName
-                + "') or(Password = '"
-                + password
-                + "' and Email = '"
+                + "' or Email = '"
                 + loginName
-                + "')";
+                + "'";
 
             dataReader = command.ExecuteReader();
             if (dataReader.Read())
-                status = true;
+            {
+                string hashedPassword = ReadSingleRow((IDataRecord)dataReader)[0];
+                if (hasher.Compare(password, hashedPassword))
+                    status = true;
+            }
 
             connection.Close();
             return status;
@@ -64,12 +69,25 @@ namespace Server
         /// </summary>
         public ListClass GetUserCredentialList(string username)
         {
+
+            string role = GetUserRole(username);
+
             ListClass credentialList = new ListClass();
 
             command = new SqlCommand();
             connection.Open();
             command.Connection = connection;
-            command.CommandText = "select C.ID, C.ListID, C.TimeStamp, C.Password, C.UserName, C.Address, C.Title, C.Notes " +
+
+            if (role == "1")
+            {
+                command.CommandText = "select C.ID, C.ListID, C.TimeStamp, C.Password, C.UserName, C.Address, C.Title, C.Notes, L.Name " +
+                "from List as L " +
+                "inner join Credentials as C " +
+                "on C.ListID = L.ID ";
+            }
+            else
+            {
+                command.CommandText = "select C.ID, C.ListID, C.TimeStamp, C.Password, C.UserName, C.Address, C.Title, C.Notes, L.Name " +
                 "from List as L " +
                 "inner join AccountListMerge as AL " +
                 "on AL.ListID = L.ID " +
@@ -80,14 +98,35 @@ namespace Server
                 "where A.UserName = '" +
                 username +
                 "'";
+            }
 
             dataReader = command.ExecuteReader();
             while (dataReader.Read())
                 credentialList.AddCredentialSlot(ReadSingleRow((IDataRecord)dataReader));
-            //credentialList = credentialList + ReadSingleRow((IDataRecord)dataReader);
 
             connection.Close();
             return credentialList;
+        }
+
+        private string GetUserRole(string username)
+        {
+            string role = new string("");
+            command = new SqlCommand();
+            connection.Open();
+            command.Connection = connection;
+            command.CommandText = "select AR.ID as [Role Id], A.ID, Ar.Role from Account as A " +
+                "inner join AccountRole as AR " +
+                "on A.RoleID = AR.ID " +
+                "where A.UserName = '" +
+                username +
+                "'";
+
+            dataReader = command.ExecuteReader();
+            if (dataReader.Read())
+                role = ReadSingleRow((IDataRecord)dataReader)[0];
+
+            connection.Close();
+            return role;
         }
 
         /// <summary>

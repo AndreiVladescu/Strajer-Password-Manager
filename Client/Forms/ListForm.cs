@@ -14,14 +14,10 @@ namespace Client
         }
         private void InitDesign()
         {
-            //dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             if (Int32.Parse(ClientMain.account.RoleID) != 1)
-            {
                 dataGrid.ReadOnly = true;
-                //dataGrid.AllowUserToAddRows = true;
-                //dataGrid.AllowUserToDeleteRows = true;
-            }
-            LblListName.Text = listID.ToString();
+
+            LblListName.Text = ClientMain.credentialsList.GetListName(listID);
         }
         private void ListForm_Load(object sender, EventArgs e)
         {

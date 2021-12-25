@@ -71,7 +71,9 @@ namespace Server
 
             if (response == PacketHeader.LoginResponsePositive)
             {
+                // Returns user-related details - account name, email, etc.
                 SendClientDetails(userName, ref streamWriter);
+                // Returns user's visible lists
                 SendClientCredentials(userName, ref streamWriter);
             }
         }

@@ -72,6 +72,7 @@ namespace Client
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            this.UpdateServerBtn.Visible = false;
             listID = 0;
             var uniqList = UniqueLists();
             numberOfLists = ClientMain.listInfo.uniqueLists;
@@ -84,7 +85,8 @@ namespace Client
         {
             List<string> uniqListID = new List<string>();
             var tempList = ClientMain.credentialsList.GetListOfLists();
-            for (int i = 0; i < ClientMain.listInfo.numberOfLists; i++)
+            int nrOfLists = ClientMain.listInfo.numberOfLists;
+            for (int i = 0; i < nrOfLists; i++)
             {
                 bool seal = true;
                 for (int j = 0; j < uniqListID.Count; j++)
