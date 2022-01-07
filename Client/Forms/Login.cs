@@ -24,17 +24,17 @@ namespace Client
                 List<string> loginData = new List<string> { TextBoxUsername.Text, TextBoxPassword.Text };
                 loginPacket.SetData(loginData);
 
-                ClientMain.client.streamWriter.WriteLine(loginPacket.ToString());
+                ClientMain.client.streamWriter.WriteLine(Encryption.Caesar(loginPacket.ToString(), 42));
                 ClientMain.client.streamWriter.Flush();
 
-                string recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
+                string recvMessageEncoded = Encryption.Caesar(ClientMain.client.streamReader.ReadLine(), -42);
                 Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
 
                 if (recvPacket.GetHeader() == PacketHeader.LoginResponsePositive)
                 {
-                    recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
+                    recvMessageEncoded = Encryption.Caesar(ClientMain.client.streamReader.ReadLine(), -42);
                     Packet detailsPacket = Packet.ReconstructPacket(recvMessageEncoded);
-                    recvMessageEncoded = ClientMain.client.streamReader.ReadLine();
+                    recvMessageEncoded = Encryption.Caesar(ClientMain.client.streamReader.ReadLine(), -42);
                     Packet listsPacket = Packet.ReconstructPacket(recvMessageEncoded);
 
                     SetAccountDetails(detailsPacket);

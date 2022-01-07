@@ -66,7 +66,7 @@ namespace Server
                 response = PacketHeader.LoginResponseNegative;
             }
             loginPacket.SetHeader(response);
-            streamWriter.WriteLine(loginPacket.ToString());
+            streamWriter.WriteLine(Encryption.Caesar(loginPacket.ToString(), 42));
             streamWriter.Flush();
 
             if (response == PacketHeader.LoginResponsePositive)
@@ -87,7 +87,7 @@ namespace Server
             Packet detailsPacket = new Packet(PacketHeader.SendClientDetails,
                 sqlManager.GetUserDetails(userName));
 
-            streamWriter.WriteLine(detailsPacket.ToString());
+            streamWriter.WriteLine(Encryption.Caesar(detailsPacket.ToString(), 42));
             streamWriter.Flush();
         }
         /// <summary>
@@ -100,7 +100,7 @@ namespace Server
             Packet credentialsPacket = new Packet(PacketHeader.SendClientCredentials,
                 sqlManager.GetUserCredentialList(userName));
 
-            streamWriter.WriteLine(credentialsPacket.ToString());
+            streamWriter.WriteLine(Encryption.Caesar(credentialsPacket.ToString(), 42));
             streamWriter.Flush();
         }
         /// <summary>
@@ -118,7 +118,7 @@ namespace Server
                 // Here we recieve client's response if any.
                 while (socketForClient.Connected)
                 {
-                    string recvMessageEncoded = streamReader.ReadLine();
+                    string recvMessageEncoded = Encryption.Caesar(streamReader.ReadLine(), -42);
                     Packet recvPacket = Packet.ReconstructPacket(recvMessageEncoded);
                     logger.WriteLine("Message recieved by client:" + recvPacket.GetUnifiedDecodedMessage());
                     switch (recvPacket.GetHeader())
